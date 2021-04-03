@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IndexViewModel
+
+@if (Model.TeamName == null)
+{
+    <h1 class="row p-3 card card-body rounded shadow">All Teams</h1>
+}
+else
+{
+    <h1 class="row p-3 card card-body rounded shadow">@Model.TeamName</h1>
+} 
+
+
+<div class=" rounded shadow text-center">
+
+    <table class="table table-striped bg-light">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Middle Init</th>
+                <th>Last Name</th>
+                <th>Street Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model.Bowlers)
+            {
+                <tr>
+                    <td>@x.BowlerFirstName</td>
+                    <td>@x.BowlerMiddleInit</td>
+                    <td>@x.BowlerLastName</td>
+                    <td>@x.BowlerAddress</td>
+                    <td>@x.BowlerCity</td>
+                    <td>@x.BowlerState</td>
+                    <td>@x.BowlerZip</td>
+                    <td>@x.BowlerPhoneNumber</td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+    
+    <div page-info="@Model.PageNumberingInfo" page-url-teamname="@Model.TeamName"
+         page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
+         page-class-selected="btn-dark" class="btn-group pull-right m-1 p-3">
+    </div>
+
+</div>
