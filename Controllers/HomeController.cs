@@ -24,7 +24,7 @@ namespace BowlingLeagueInfo.Controllers
         public IActionResult Index(long? teamid, string teamname, int pageNum = 0)
         {
             //initialize page size to 5 items
-            int pageSize = 2;
+            int pageSize = 5;
 
             //return view with IndexViewModel object
             return View(new IndexViewModel
