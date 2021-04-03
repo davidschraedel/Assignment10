@@ -2,15 +2,17 @@
 @model IEnumerable<Teams>
 
 <br />
+<!--home button, to return user to viewing all teams-->
 <div class="p-4">
-    <a class="btn btn-block btn-outline-dark" asp-action="Index" asp-controller="Home" asp-route-teamid="">Home</a>
+    <a class="btn btn-block btn-outline-dark" asp-action="Index" asp-controller="Home" asp-route-teamid="" asp-route-pagenum="1">Home</a>
 
     @foreach (var x in Model)
     {
+        <!--Button for each team name, to select a team.  Change style of button if team name is selected or not-->
         <a class="btn btn-block @(x.TeamName == ViewBag.SelectedType ? "btn-dark shadow" : "btn-outline-dark")"
            asp-action="Index" asp-controller="Home"
            asp-route-teamid="@x.TeamId"
-           asp-route-teamname="@x.TeamName">
+           asp-route-teamname="@x.TeamName" asp-route-pagenum="1">
             @x.TeamName
         </a>
     }

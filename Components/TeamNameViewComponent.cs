@@ -15,11 +15,12 @@ namespace BowlingLeagueInfo.Components
             _context = context;
         }
 
-
+        //invoke component result
         public IViewComponentResult Invoke()
         {
+            //set viewbag selected type to teamname from routing data
             ViewBag.SelectedType = RouteData?.Values["teamname"];
-
+            //return component view with team objects
             return View(_context.Teams
                 .Distinct()
                 .OrderBy(x => x));
