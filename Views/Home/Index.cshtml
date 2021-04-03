@@ -1,9 +1,17 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    //show team name if there is a team selected
+    if (Model.TeamName == null)
+    {
+        ViewData["Title"] = "Home";
+    }
+    else
+    {
+        ViewData["Title"] = Model.TeamName;
+    }
 }
 
 @model IndexViewModel
-
+<!-- if a team name is not selected, heading = All Teams.  Otherwise, show user heading with the team name -->
 @if (Model.TeamName == null)
 {
     <h1 class="row p-3 card card-body rounded shadow">All Teams</h1>
@@ -11,11 +19,10 @@
 else
 {
     <h1 class="row p-3 card card-body rounded shadow">@Model.TeamName</h1>
-} 
+}
 
 
 <div class=" rounded shadow text-center">
-
     <table class="table table-striped bg-light">
         <thead>
             <tr>
@@ -30,6 +37,7 @@ else
             </tr>
         </thead>
         <tbody>
+            <!--for each bowler, list contact information in a table row-->
             @foreach (var x in Model.Bowlers)
             {
                 <tr>
@@ -48,7 +56,7 @@ else
         </tbody>
     </table>
 
-    
+    <!--Page number button group, pagination functionality-->
     <div page-info="@Model.PageNumberingInfo" page-url-teamname="@Model.TeamName"
          page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
          page-class-selected="btn-dark" class="btn-group pull-right m-1 p-3">

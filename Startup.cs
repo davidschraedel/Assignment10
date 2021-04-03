@@ -27,6 +27,7 @@ namespace BowlingLeagueInfo
         {
             services.AddControllersWithViews();
 
+            //use BowlingLeagueDbConnection connection string, for BowlingLeague.sqlite
             services.AddDbContext<BowlingLeagueContext>(options =>
                 options.UseSqlite(Configuration["ConnectionStrings:BowlingLeagueDbConnection"])
             );
@@ -54,6 +55,7 @@ namespace BowlingLeagueInfo
 
             app.UseEndpoints(endpoints =>
             {
+                //various routes to route data in an visually understandable way
                 endpoints.MapControllerRoute("teamnamepagenum",
                     "Team/{teamid}/{teamname}/{pagenum}",
                     new { Controller = "Home", action = "Index" }

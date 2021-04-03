@@ -13,7 +13,6 @@ namespace BowlingLeagueInfo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
         private BowlingLeagueContext _context { get; set; }
 
         public HomeController(ILogger<HomeController> logger, BowlingLeagueContext context)
@@ -24,17 +23,21 @@ namespace BowlingLeagueInfo.Controllers
 
         public IActionResult Index(long? teamid, string teamname, int pageNum = 0)
         {
-            int pageSize = 5;
+            //initialize page size to 5 items
+            int pageSize = 2;
 
+            //return view with IndexViewModel object
             return View(new IndexViewModel
             {
+                //bowler objects for the team selected, or all bowlers if no team is selected, ordered by bowlers' last name
                 Bowlers = (_context.Bowlers
                 .Where(x => x.Team.TeamId == teamid || teamid == null)
                 .OrderBy(x => x.BowlerLastName)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize)
+                .Skip((pageNum - 1) * pageSize) //skip according to which page is selected
+                .Take(pageSize) //take the number of items determined by pageSize variable
                 .ToList()),
 
+                //page number information object
                 PageNumberingInfo = new PageNumberingInfo
                 {
                     NumItemsPerPage = pageSize,
@@ -43,7 +46,7 @@ namespace BowlingLeagueInfo.Controllers
                     TotalNumItems = (teamid == null ? _context.Bowlers.Count() :
                         _context.Bowlers.Where(x => x.Team.TeamId == teamid).Count())
                 },
-
+                //name of team selected
                 TeamName = teamname
             });
         }
